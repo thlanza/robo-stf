@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+require("dotenv").config();
 
 function timeout(ms) {
     return new Promise((res) => setTimeout(res, ms));
@@ -12,7 +13,16 @@ module.exports = {
     //     '--disable-backgrounding-occluded-windows',
     //     '--disable-renderer-backgrounding'
     //   ];
-      const browser = await puppeteer.launch();
+      const browser = await puppeteer.launch({
+        args: [
+            "--disable-setuid-sandbox",
+            "--no-sandbox",
+            "--single-process",
+            "--no-zygote"
+        ],
+        executablePath: process.env.NODE_ENV === 'production' ? process.env.PUPPETEER_EXECUTABLE_PATH
+        : puppeteer.executablePath()
+      });
 
     try {
         

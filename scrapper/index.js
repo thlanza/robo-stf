@@ -34,6 +34,7 @@ module.exports = {
         
           const page = await browser.newPage();   
           await page.goto('https://portal.stf.jus.br/');
+          await timeout(2500);
           await page.type('input[name="pesquisaPrincipalClasseNumero"]', numero);
           const buttonSelector = '#btnPesquisar';
           await page.click(buttonSelector);
@@ -119,7 +120,7 @@ module.exports = {
          }
          return objetoFinal;
         } catch(err) {
-            console.log(err.stack);
+            console.log("stack, erro na função de scrap", err.stack);
             throw new Error('Erro na função scrap', err);
         } finally {
             await browser.close();

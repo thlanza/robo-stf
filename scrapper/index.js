@@ -119,6 +119,7 @@ module.exports = {
          }
          return objetoFinal;
         } catch(err) {
+            console.trace();
             throw new Error('Erro na função scrap', err);
         } finally {
             await browser.close();

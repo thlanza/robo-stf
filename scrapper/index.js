@@ -26,11 +26,11 @@ module.exports = {
 
     try {
         
-        //   const context = await browser.createIncognitoBrowserContext();
+          const context = await browser.createIncognitoBrowserContext();
         
-        //   if (context.isIncognito()) {
-        //     console.log('Modo navegação anônima ativado')
-        //   }
+          if (context.isIncognito()) {
+            console.log('Modo navegação anônima ativado')
+          }
         
           const page = await browser.newPage();   
           await page.goto('https://portal.stf.jus.br/', {

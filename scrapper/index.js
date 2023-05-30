@@ -34,7 +34,7 @@ module.exports = {
         
           const page = await browser.newPage();   
           await page.goto('https://portal.stf.jus.br/');
-          await timeout(2500);
+          await timeout(4000);
           await page.type('input[name="pesquisaPrincipalClasseNumero"]', numero);
           const buttonSelector = '#btnPesquisar';
           await page.click(buttonSelector);

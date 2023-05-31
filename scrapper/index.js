@@ -55,21 +55,24 @@ module.exports = {
           console.log('depois de carregado')
         //   console.log("página", (await page.content()));
           await page.type('input[name="pesquisaPrincipalClasseNumero"]', numero);
+          console.log('depois de digitar');
           const buttonSelector = '#btnPesquisar';
+          const navigationPromise = page.waitForNavigation();
           await page.click(buttonSelector);
-          await page.waitForNavigation();
+          await navigationPromise;
           console.log('depois de clicar no botão de submit');
           const acceptCookiesSelector = '#acceptCookies';
           await page.click(acceptCookiesSelector);
           await timeout(350);
+          const navigationPromise2 = page.waitForNavigation();
           const linkIdAcao = await page.$x(`//a[contains(., '${idAcao}')]`);
             if (linkIdAcao) {
             await linkIdAcao[0].click();
+            await navigationPromise2;
             } else {
                 alert("LINK NÃO ENCONTRADO")
             }
           console.log('depois de clicar no link')
-          await page.waitForNavigation();
           console.log('depois de esperar a navegação após o link')
           await timeout(350);
          const processoPartesSelector = '.processo-partes'

@@ -44,10 +44,10 @@ module.exports = {
           await page.type('input[name="pesquisaPrincipalClasseNumero"]', numero);
           const buttonSelector = '#btnPesquisar';
           await page.click(buttonSelector);
-          await timeout(2000);
+          await page.waitForNavigation();
           const acceptCookiesSelector = '#acceptCookies';
           await page.click(acceptCookiesSelector);
-          await page.waitForNavigation();
+          await timeout(1200);
           const linkIdAcao = await page.$x(`//a[contains(., '${idAcao}')]`);
             if (linkIdAcao) {
             await linkIdAcao[0].click();

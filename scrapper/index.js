@@ -36,7 +36,8 @@ module.exports = {
             console.log('Modo navegação anônima ativado')
           }
         
-          const page = await browser.newPage();   
+          const page = await browser.newPage();  
+          console.log('depois de page'); 
           await page.setRequestInterception(true)
             page.on('request', (request) => {
             if(request.resourceType() === 'stylesheet' || request.resourceType() === 'font' || request.resourceType() === 'image'){
@@ -51,11 +52,13 @@ module.exports = {
           await page.goto('https://portal.stf.jus.br/', {
             waitUntil: 'domcontentloaded',
           });
+          console.log('depois de carregado')
         //   console.log("página", (await page.content()));
           await page.type('input[name="pesquisaPrincipalClasseNumero"]', numero);
           const buttonSelector = '#btnPesquisar';
           await page.click(buttonSelector);
           await page.waitForNavigation();
+          console.log('depois de clicar no botão de submit');
           const acceptCookiesSelector = '#acceptCookies';
           await page.click(acceptCookiesSelector);
           await timeout(350);
@@ -65,7 +68,9 @@ module.exports = {
             } else {
                 alert("LINK NÃO ENCONTRADO")
             }
+          console.log('depois de clicar no link')
           await page.waitForNavigation();
+          console.log('depois de esperar a navegação após o link')
           await timeout(350);
          const processoPartesSelector = '.processo-partes'
          const processoPartes = await page.$$eval(processoPartesSelector,

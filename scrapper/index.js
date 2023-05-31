@@ -1,5 +1,9 @@
 const puppeteer = require('puppeteer');
+const puppeteerExtra = require('puppeteer-extra');
+const pluginStealth = require('puppeteer-extra-plugin-stealth');
 require("dotenv").config();
+
+puppeteerExtra.use(pluginStealth());
 
 function timeout(ms) {
     return new Promise((res) => setTimeout(res, ms));
@@ -13,7 +17,7 @@ module.exports = {
     //     '--disable-backgrounding-occluded-windows',
     //     '--disable-renderer-backgrounding'
     //   ];
-      const browser = await puppeteer.launch({
+      const browser = await puppeteerExtra.launch({
         args: [
             "--disable-setuid-sandbox",
             "--no-sandbox",

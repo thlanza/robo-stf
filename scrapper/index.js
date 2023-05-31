@@ -41,14 +41,14 @@ module.exports = {
           await page.goto('https://portal.stf.jus.br/', {
             waitUntil: 'domcontentloaded',
           });
-          console.log("página", (await page.content()));
+        //   console.log("página", (await page.content()));
           await page.type('input[name="pesquisaPrincipalClasseNumero"]', numero);
           const buttonSelector = '#btnPesquisar';
           await page.click(buttonSelector);
           await page.waitForNavigation();
           const acceptCookiesSelector = '#acceptCookies';
           await page.click(acceptCookiesSelector);
-          await timeout(1200);
+          await timeout(350);
           const linkIdAcao = await page.$x(`//a[contains(., '${idAcao}')]`);
             if (linkIdAcao) {
             await linkIdAcao[0].click();
@@ -56,7 +56,7 @@ module.exports = {
                 alert("LINK NÃO ENCONTRADO")
             }
           await page.waitForNavigation();
-          await timeout(2200);
+          await timeout(350);
          const processoPartesSelector = '.processo-partes'
          const processoPartes = await page.$$eval(processoPartesSelector,
             elements => elements.map(item => item.textContent));
@@ -64,10 +64,10 @@ module.exports = {
          const processoClasseSelector = '.processo-classe';
          const processoDadosSelector = '.processo-dados';
     
-         async function evalAndLog(selector) {
-            const array = await page.$$eval(selector, elements => elements.map(item => item.textContent));
-            console.log(selector, array);
-         }
+        //  async function evalAndLog(selector) {
+        //     const array = await page.$$eval(selector, elements => elements.map(item => item.textContent));
+        //     console.log(selector, array);
+        //  }
     
          async function arraySelectors(selector) {
             const array = await page.$$eval(selector, elements => elements.map(item => item.textContent));

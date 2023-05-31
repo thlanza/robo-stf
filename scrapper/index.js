@@ -37,6 +37,11 @@ module.exports = {
           }
         
           const page = await browser.newPage();   
+          await page.setRequestInterception(true)
+            page.on('request', (request) => {
+            if (request.resourceType() === 'image') request.abort()
+            else request.continue()
+            })
           page.setDefaultNavigationTimeout(0);
           await page.goto('https://portal.stf.jus.br/', {
             waitUntil: 'domcontentloaded',

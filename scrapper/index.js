@@ -47,6 +47,7 @@ module.exports = {
           await timeout(2000);
           const acceptCookiesSelector = '#acceptCookies';
           await page.click(acceptCookiesSelector);
+          await page.waitForNavigation();
           const linkIdAcao = await page.$x(`//a[contains(., '${idAcao}')]`);
             if (linkIdAcao) {
             await linkIdAcao[0].click();

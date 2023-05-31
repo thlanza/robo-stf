@@ -38,7 +38,8 @@ module.exports = {
         
           const page = await browser.newPage();   
           await page.goto('https://portal.stf.jus.br/', {
-            waitUntil: 'domcontentloaded'
+            waitUntil: 'domcontentloaded',
+            timeout: 0
           });
           console.log("página", (await page.content()));
           await page.type('input[name="pesquisaPrincipalClasseNumero"]', numero);

@@ -40,10 +40,10 @@ module.exports = {
           await page.setRequestInterception(true)
             page.on('request', (request) => {
             if(request.resourceType() === 'stylesheet' || request.resourceType() === 'font' || request.resourceType() === 'image'){
-                request.abort();
+                return request.abort();
             }
             if(request.url().includes('www.google-analytics.com')){
-                request.abort();
+                return request.abort();
             }
             else request.continue()
             })

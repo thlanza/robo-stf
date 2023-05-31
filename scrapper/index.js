@@ -39,7 +39,12 @@ module.exports = {
           const page = await browser.newPage();   
           await page.setRequestInterception(true)
             page.on('request', (request) => {
-            if (request.resourceType() === 'image') request.abort()
+            if(request.resourceType() === 'stylesheet' || request.resourceType() === 'font' || request.resourceType() === 'image'){
+                request.abort();
+            }
+            if(request.url().includes('www.google-analytics.com')){
+                request.abort();
+            }
             else request.continue()
             })
           page.setDefaultNavigationTimeout(0);
